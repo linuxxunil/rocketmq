@@ -3,19 +3,19 @@ cd /opt/rocketmq/bin
 start_brokera() {
 ./mqnamesrv &
 sleep 5
-./mqbroker -n rocketmq-nameserver1:9876,rocketmq-nameserver2:9876 -c ../conf/2m-2s-sync/broker-a.properties --enable-proxy &
-./mqbroker -n rocketmq-nameserver1:9876,rocketmq-nameserver2:9876 -c ../conf/2m-2s-sync/broker-b-s.properties &
+./mqbroker -n 'rocketmq-nameserver1:9876;rocketmq-nameserver2:9876' -c ../conf/2m-2s-sync/broker-a.properties --enable-proxy &
+./mqbroker -n 'rocketmq-nameserver1:9876;rocketmq-nameserver2:9876' -c ../conf/2m-2s-sync/broker-b-s.properties &
 }
 
 start_brokerb() {
 ./mqnamesrv &
 sleep 5
-./mqbroker -n rocketmq-nameserver1:9876,rocketmq-nameserver2:9876 -c ../conf/2m-2s-sync/broker-b.properties --enable-proxy &
-./mqbroker -n rocketmq-nameserver1:9876,rocketmq-nameserver2:9876 -c ../conf/2m-2s-sync/broker-a-s.properties &
+./mqbroker -n 'rocketmq-nameserver1:9876;rocketmq-nameserver2:9876' -c ../conf/2m-2s-sync/broker-b.properties --enable-proxy &
+./mqbroker -n 'rocketmq-nameserver1:9876;rocketmq-nameserver2:9876' -c ../conf/2m-2s-sync/broker-a-s.properties &
 }
 
 start() {
- export NAMESRV_ADDR=rocketmq-nameserver1:9876,rocketmq-nameserver2:9876
+ export NAMESRV_ADDR=rocketmq-nameserver1:9876;rocketmq-nameserver2:9876
  start_brokera
 }
 
