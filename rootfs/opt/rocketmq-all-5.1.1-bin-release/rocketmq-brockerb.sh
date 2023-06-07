@@ -1,5 +1,6 @@
 #!/bin/sh
 cd /opt/rocketmq/bin
+
 start_brokera() {
 ./mqnamesrv &
 sleep 5

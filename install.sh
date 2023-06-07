@@ -1,5 +1,4 @@
 #!/bin/sh
-DIR=/opt
 echo "Installing..."
-cp -aR rootfs/* /opt
+cp -aRv rootfs/* /
 echo "Finished"
