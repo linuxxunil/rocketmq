@@ -16,6 +16,7 @@ sleep 5
 }
 
 start() {
+ export NAMESRV_ADDR=rocketmq-nameserver2:9876
  start_brokerb
 }
 
