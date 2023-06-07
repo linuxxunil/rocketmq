@@ -15,7 +15,7 @@ sleep 5
 }
 
 start() {
- export NAMESRV_ADDR=rocketmq-nameserver1:9876;rocketmq-nameserver2:9876
+ export NAMESRV_ADDR='rocketmq-nameserver1:9876;rocketmq-nameserver2:9876'
  start_brokera
 }
 
