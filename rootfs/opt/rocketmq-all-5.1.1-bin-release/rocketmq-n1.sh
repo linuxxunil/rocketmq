@@ -1,22 +1,24 @@
 #!/bin/sh
 cd /opt/rocketmq/bin
 
-start_n1() {
-./mqnamesrv -n 'rocketmq-nameserver1:9876;rocketmq-nameserver2:9876' -c ../conf/controller/cluster-2n-namesrv-plugin/namesrv-n1.conf &	
-sleep 5
-./mqbroker -n 'rocketmq-nameserver1:9876;rocketmq-nameserver2:9876' -c ../conf/controller/cluster-2n-namesrv-plugin/broker-n1.conf  --enable-proxy &
+nodes_domain='rocketmq-node1:9876;rocketmq-node2:9876;rocketmq-node3:9876'
+
+start_namesrv() {
+ node=$1
+ ./mqnamesrv -n ${nodes_domain} &
 }
 
-start_n2(){
-./mqnamesrv -n 'rocketmq-nameserver1:9876;rocketmq-nameserver2:9876' -c ../conf/controller/cluster-2n-namesrv-plugin/namesrv-n2.conf &
-sleep 5
-./mqbroker -n 'rocketmq-nameserver1:9876;rocketmq-nameserver2:9876' -c ../conf/controller/cluster-2n-namesrv-plugin/broker-n2.conf  --enable-proxy &
+start_broker() {
+ node=$1
+ ./mqbroker  -n ${nodes_domain} -c ../conf/dledger/broker-${node}.conf  --enable-proxy &
 }
 
 
 start() {
- export NAMESRV_ADDR='rocketmq-nameserver1:9876;rocketmq-nameserver2:9876'
- start_n1
+ node=$1
+ start_namesrv ${node}
+ sleep 5
+ start_broker ${node}
 }
 
 stop() {
@@ -26,9 +28,16 @@ stop() {
 ./mqshutdown proxy
 }
 
+export NAMESRV_ADDR=${nodes_domain}
 case "$1" in
+ start_broker)
+   start_broker n1
+ ;;
+ start_namesrv)
+   start_namesrv n1
+ ;;
  start)
-   start
+   start n1
  ;;
  stop)
    stop
@@ -39,8 +48,9 @@ case "$1" in
    start
  ;;
  *)
-   echo "Usage $0 {start|stop|restart}"
+   echo "Usage $0 {start|start_broker|start_namesrv|stop|restart}"
    exit 1
+ ;;
  esac
 
 exit 0

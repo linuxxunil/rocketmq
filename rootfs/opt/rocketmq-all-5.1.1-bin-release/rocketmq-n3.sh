@@ -31,13 +31,13 @@ stop() {
 export NAMESRV_ADDR=${nodes_domain}
 case "$1" in
  start_broker)
-   start_broker n2
+   start_broker n3
  ;;
  start_namesrv)
-   start_namesrv n2
+   start_namesrv n3
  ;;
  start)
-   start n2
+   start n3
  ;;
  stop)
    stop

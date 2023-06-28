@@ -9,10 +9,6 @@ ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 
 # nameserver
-192.168.100.40 rocketmq-nameserver1
-192.168.100.41 rocketmq-nameserver2
-# broker
-192.168.100.40 rocketmq-master1
-192.168.100.40 rocketmq-slave2
-192.168.100.41 rocketmq-master2
-192.168.100.41 rocketmq-slave1
+192.168.100.50 rocketmq-node1
+192.168.100.51 rocketmq-node2
+192.168.100.52 rocketmq-node3
